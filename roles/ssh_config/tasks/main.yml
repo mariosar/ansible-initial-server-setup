@@ -13,6 +13,12 @@
     line: "PermitRootLogin no"
   notify: Restart sshd
 
+- name: Add id_rsa.pub to sudo user
+  authorized_key:
+    user: "{{ sudo_user }}"
+    key: "{{ lookup('file', public_key_path) }}"
+    exclusive: yes
+
 - name: Prevent password authentication
   lineinfile:
     dest: "/etc/ssh/sshd_config"
