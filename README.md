@@ -6,25 +6,25 @@ Ubuntu Server version: 18.04.3 LTS
 
 Tasks this playbook will handle:
 
-USER_MANAGEMENT:
+**USER_MANAGEMENT**:
 - Create a sudo user with password
 - Change the default root password
 
-SSH CONFIG:
+**SSH CONFIG**:
 - Modify the standard ssh port to a custom port
 - Prevent root login
 - Add a specified public key to authorized_keys of new sudo user (for ssh without password)
 - Prevent password authentication
 
-COMMON:
+**COMMON**:
 - Update package cache / Upgrade Packages
 - Install UFW, Fail2Ban
 
-SECURITY:
+**SECURITY**:
 - UFW: Deny all incoming, but allow SSH on custom port
 - Fail2Ban: Enable Fail2Ban Jail for SSHD + SSHD-DDOS
 
-Instructions:
+### Instructions:
 
 1. Enter your server IP addresses in inventory files based on environment (staging / production).
 2. Edit group_vars/all/vars and enter your desired SUDO_USER and modify the SSH port or keep it the same.
@@ -35,7 +35,7 @@ Instructions:
 
 See [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html) if you're not sure how to create the vault.
 
-#### Running your playbook:
+### Running your playbook:
 
 The first time running your playbook the default port is 22 and the user is root. We haven't yet done anything on our servers.
 
