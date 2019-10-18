@@ -1,0 +1,13 @@
+---
+- name: Setup ufw
+  ufw:
+    policy: deny
+    direction: incoming
+    state: enabled
+
+- name: Allow ssh on port
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "{{ ssh_port | string }}"
+    state: enabled

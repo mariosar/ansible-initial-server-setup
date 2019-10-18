@@ -1,0 +1,9 @@
+---
+# Replace SUDO_USER below with the sudo user you'd like created
+sudo_user: SUDO_USER
+# Enter your desired SSH port. This port will be configured as your default ssh port, ufw will be updated to allow the port, fail2ban will likewise be updated
+ssh_port: 22
+public_key_path: ~/.ssh/id_rsa.pub
+root_password: "{{ vault_root_password }}"
+sudo_password: "{{ vault_sudo_password }}"
+sha512_secret_salt: "{{ vault_sha512_secret_salt }}"

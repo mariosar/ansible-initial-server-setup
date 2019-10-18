@@ -1,0 +1,12 @@
+---
+- name: override the basic fail2ban config with .local file
+  # Simple template enabling sshd and sshd-ddos protection
+  # Failed attempts are monitored from the auth.log file
+  # The ssh_port has been updated to reflect the change in sshd config
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart fail2ban

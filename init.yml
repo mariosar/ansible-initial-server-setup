@@ -1,0 +1,10 @@
+---
+- hosts: servers
+  become: yes
+  roles:
+    - manage_users 
+    - ssh_config
+  post_tasks:
+    - name: Change ansible port
+      set_fact:
+        ansible_port: "{{ ssh_port }}"

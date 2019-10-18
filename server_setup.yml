@@ -1,0 +1,37 @@
+---
+- hosts: servers
+  user: "{{ sudo_user }}"
+  become: yes
+  vars:
+    ansible_port: "{{ ssh_port }}" 
+    ansible_become_password: "{{ sudo_password }}"
+    ubuntu_packages:
+    - ufw
+    - fail2ban
+
+  pre_tasks:
+    - name: Upgrade aptitude
+      apt:
+        name: aptitude
+        force_apt_get: yes
+
+    - name: Update package cache
+      apt:
+        name: "*"
+        update_cache: yes
+        state: present
+
+    - name: Upgrade APT to latest packages
+      apt: 
+        name: "*"
+        state: latest
+
+    - name: Install ubuntu packages
+      apt:
+        pkg: "{{ ubuntu_packages }}"
+        state: present 
+
+  roles:
+    - ufw
+    - fail2ban
+

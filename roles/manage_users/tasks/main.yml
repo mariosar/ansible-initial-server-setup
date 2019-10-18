@@ -1,0 +1,24 @@
+---
+- name: Create sudo user
+  user:
+    name: "{{ sudo_user }}"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    password: "{{ sudo_password | password_hash('sha512', sha512_secret_salt) }}"
+
+- name: Set ansible become password
+  set_fact:
+    ansible_become_password: "{{ sudo_password }}"
+
+- name: Change root password
+  user:
+    name: root
+    password: "{{ root_password | password_hash('sha512', sha512_secret_salt) }}"
+
+- name: Add id_rsa.pub to sudo user
+  authorized_key:
+    user: "{{ sudo_user }}"
+    key: "{{ lookup('file', public_key_path) }}"
+    exclusive: yes
+
