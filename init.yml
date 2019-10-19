@@ -5,6 +5,16 @@
     - manage_users 
     - ssh_config
   post_tasks:
-    - name: Change ansible port
+    - name: Change ansible port + ansible user
       set_fact:
         ansible_port: "{{ ssh_port }}"
+        ansible_user: "{{ sudo_user }}"
+        
+    - name: Check for port connection
+      wait_for:
+        port: "{{ ssh_port }}"
+        host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+        state: "started"
+        connect_timeout: "5"
+        timeout: "10"
+      
