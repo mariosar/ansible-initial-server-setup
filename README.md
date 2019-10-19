@@ -50,7 +50,7 @@ Run:
 ansible-playbook -i inventory -e ansible_port=PORT -u USER site.yml --ask-vault-pass --ask-become-pass
 
 # replace inventory with either production or development, depending on which environment you are targetting. 
-# Replace USER for the sudo user and PORT for the ssh port. --ask-become-pass is required for privilege escalation since we are not connecting as root anymore.
+# replace USER for the sudo user and PORT for the ssh port. --ask-become-pass is required for privilege escalation since we are not connecting as root anymore.
 ```
 
 Hope you find this useful and feel free to use it and / or modify it to fit your needs.
